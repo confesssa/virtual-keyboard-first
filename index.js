@@ -5,7 +5,7 @@ document.body.appendChild(title);
 
 const textArea = document.createElement('textArea');
 textArea.classList.add('use-keyboard-input', 'textArea');
-textArea.setAttribute('autofocus', 'autofocus');
+textArea.setAttribute('placeholder', 'Click here');
 document.body.appendChild(textArea);
 
 const Keyboard = {
