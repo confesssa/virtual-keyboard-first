@@ -8,7 +8,7 @@ document.body.appendChild(title);
 // create TextArea
 const textArea = document.createElement('textArea');
 textArea.classList.add('use-keyboard-input', 'textArea');
-textArea.setAttribute('autofocus', 'autofocus');
+// textArea.setAttribute('autofocus', 'autofocus');
 textArea.setAttribute('placeholder', 'Click here');
 document.body.appendChild(textArea);
 
@@ -211,6 +211,7 @@ const Keyboard = {
   },
 
   open(initialValue, oninput, onclose) {
+    textArea.removeAttribute('placeholder');
     this.properties.value = initialValue || "";
     this.eventHandlers.oninput = oninput;
     this.eventHandlers.onclose = onclose;
