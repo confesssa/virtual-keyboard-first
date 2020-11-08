@@ -1,8 +1,11 @@
+// create Title
 const title = document.createElement('h1');
 title.innerHTML = 'virtual keyboard for Windows';
 title.classList.add('title');
 document.body.appendChild(title);
 
+
+// create TextArea
 const textArea = document.createElement('textArea');
 textArea.classList.add('use-keyboard-input', 'textArea');
 textArea.setAttribute('autofocus', 'autofocus');
@@ -83,6 +86,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
             this._triggerEvent("oninput");
+            textArea.focus();
           });
 
           break;
@@ -94,6 +98,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this._toggleCapsLock();
             keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+            textArea.focus();
           });
 
           break;
@@ -105,6 +110,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value += "\n";
             this._triggerEvent("oninput");
+            textArea.focus();
           });
 
           break;
@@ -116,6 +122,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value += " ";
             this._triggerEvent("oninput");
+            textArea.focus();
           });
 
           break;
@@ -127,13 +134,14 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value += "    ";
             this._triggerEvent("oninput");
+            textArea.focus();
           });
 
           break;
 
         case "done":
           keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
-          keyElement.innerHTML = createIconHTML("check_circle");
+          keyElement.innerHTML = createIconHTML("keyboard_hide");
 
           keyElement.addEventListener("click", () => {
             this.close();
@@ -148,6 +156,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
           textArea.focus();
           textArea.selectionEnd = textArea.selectionEnd - 1;
+          textArea.focus();
           });
           
           break;
@@ -158,6 +167,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
                 textArea.focus();
                 textArea.selectionStart = textArea.selectionStart + 1;
+                textArea.focus();
             });
             
             break;
@@ -168,6 +178,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
             this._triggerEvent("oninput");
+            textArea.focus();
           });
 
           break;
