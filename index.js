@@ -26,7 +26,8 @@ const Keyboard = {
 
   properties: {
     value: "",
-    capsLock: false
+    capsLock: false,
+    shift: false
   },
 
   init() {
@@ -61,7 +62,7 @@ const Keyboard = {
       "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
       "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
       "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-      "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
+      "shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
       "done", "space", "left", "right"
     ];
 
@@ -102,6 +103,18 @@ const Keyboard = {
           });
 
           break;
+
+          case "shift":
+            keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+            keyElement.innerHTML = createIconHTML("keyboard_arrow_up");
+  
+            keyElement.addEventListener("click", () => {
+              this._toggleShift();
+              keyElement.classList.toggle("keyboard__key--active", this.properties.shift);
+              textArea.focus();
+            });
+  
+            break;
 
         case "enter":
           keyElement.classList.add("keyboard__key--wide");
@@ -176,7 +189,7 @@ const Keyboard = {
           keyElement.textContent = key.toLowerCase();
 
           keyElement.addEventListener("click", () => {
-            this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+            this.properties.value += (this.properties.capsLock || this.properties.shift) ? key.toUpperCase() : key.toLowerCase();
             this._triggerEvent("oninput");
             textArea.focus();
           });
@@ -206,6 +219,16 @@ const Keyboard = {
     for (const key of this.elements.keys) {
       if (key.childElementCount === 0) {
         key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+      }
+    }
+  },
+
+  _toggleShift() {
+    this.properties.shift = !this.properties.shift;
+
+    for (const key of this.elements.keys) {
+      if (key.childElementCount === 0) {
+        key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
       }
     }
   },
