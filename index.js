@@ -57,8 +57,8 @@ const Keyboard = {
       "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
       "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
       "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-      "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
-      "space"
+      "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
+      "done", "space", "left", "right"
     ];
 
     // Creates HTML for an icon
@@ -129,6 +129,25 @@ const Keyboard = {
           });
 
           break;
+
+        case "left":
+          keyElement.classList.add("keyboard__key--wide");
+					keyElement.innerHTML = createIconHTML("keyboard_arrow_left");
+          keyElement.addEventListener("click", () => {
+          textArea.focus();
+          textArea.selectionEnd = textArea.selectionEnd - 1;
+          });
+          
+          break;
+
+        case "right":
+          keyElement.classList.add("keyboard__key--wide");
+          keyElement.innerHTML = createIconHTML("keyboard_arrow_right");
+          keyElement.addEventListener("click", () => {
+                textArea.focus();
+                textArea.selectionStart = textArea.selectionStart + 1;
+            });
+            break;
 
         default:
           keyElement.textContent = key.toLowerCase();
