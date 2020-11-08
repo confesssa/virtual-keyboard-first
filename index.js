@@ -5,6 +5,7 @@ document.body.appendChild(title);
 
 const textArea = document.createElement('textArea');
 textArea.classList.add('use-keyboard-input', 'textArea');
+textArea.setAttribute('autofocus', 'autofocus');
 textArea.setAttribute('placeholder', 'Click here');
 document.body.appendChild(textArea);
 
@@ -55,7 +56,7 @@ const Keyboard = {
     const fragment = document.createDocumentFragment();
     const keyLayout = [
       "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
-      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+      "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
       "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
       "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
       "done", "space", "left", "right"
@@ -119,6 +120,17 @@ const Keyboard = {
 
           break;
 
+        case "tab":
+          keyElement.classList.add("keyboard__key--wide");
+          keyElement.innerHTML = createIconHTML("keyboard_tab");
+
+          keyElement.addEventListener("click", () => {
+            this.properties.value += "    ";
+            this._triggerEvent("oninput");
+          });
+
+          break;
+
         case "done":
           keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
           keyElement.innerHTML = createIconHTML("check_circle");
@@ -147,6 +159,7 @@ const Keyboard = {
                 textArea.focus();
                 textArea.selectionStart = textArea.selectionStart + 1;
             });
+            
             break;
 
         default:
